@@ -15,7 +15,8 @@ class CardService {
         }
         const cards = readCards();
         const cardId = cards.length + 1;
-        const newCard = { cardId, ...card };
+        const category = 1
+        const newCard = { cardId, category, ...card };
         cards.push(newCard);
         writeCards(cards);
         return newCard;

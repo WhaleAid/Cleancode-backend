@@ -13,9 +13,9 @@ exports.getCards = (req, res) => {
 };
 
 exports.addCard = (req, res) => {
-    const { category, question, answer, tag } = req.body;
+    const { question, answer, tag } = req.body;
     try {
-        const cardId = CardService.addCard({ category, question, answer, tag });
+        const cardId = CardService.addCard({ question, answer, tag });
         res.status(201).json({ message: 'Card added successfully', cardId });
     } catch (error) {
         res.status(500).json({ message: error.message });
