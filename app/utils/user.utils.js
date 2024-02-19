@@ -1,21 +1,24 @@
 const fs = require('fs');
 const path = require('path');
 
+const usersFilePath = path.resolve(__dirname, '../data/users.json');
+
 exports.readUsers = () => {
     try {
-        const usersData = fs.readFileSync(path.resolve(__dirname, '../data/users.json'), 'utf8');
+        const usersData = fs.readFileSync(usersFilePath, 'utf8');
         return JSON.parse(usersData);
     } catch (error) {
         console.error('Error reading users data:', error);
-        return [];
+        throw new Error('Failed to read users data');
     }
 }
 
 exports.writeUsers = (users) => {
     try {
-        fs.writeFileSync(path.resolve(__dirname, '../data/users.json'), JSON.stringify(users, null, 2));
+        fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
         console.log('Users data written successfully');
     } catch (error) {
         console.error('Error writing users data:', error);
+        throw new Error('Failed to write users data');
     }
 }

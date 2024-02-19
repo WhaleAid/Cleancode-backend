@@ -13,5 +13,10 @@
     "userId": 3,
     "username": "foobar",
     "password": "password"
+  },
+  {
+    "userId": 4,
+    "username": "JesseFa",
+    "password": "userpass"
   }
 ]

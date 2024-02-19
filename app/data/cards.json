@@ -1,0 +1,79 @@
+[
+    {
+        "id": 1,
+        "category": "computer science",
+        "question": "What is Clean Code?",
+        "answer": "Clean code is code that is easy to understand and easy to read and change.",
+        "tag": "CleanCode"
+    },
+    {
+        "id": 2,
+        "category": "computer science",
+        "question": "What is a variable?",
+        "answer": "A variable is a container that holds data that can be changed.",
+        "tag": "Variables"
+    },
+    {
+        "id": 3,
+        "category": "computer science",
+        "question": "What is a function?",
+        "answer": "A function is a block of code that can be called and executed.",
+        "tag": "Functions"
+    },
+    {
+        "id": 4,
+        "category": "computer science",
+        "question": "What is a loop?",
+        "answer": "A loop is a block of code that is repeated a number of times.",
+        "tag": "Loops"
+    },
+    {
+        "id": 5,
+        "category": "computer science",
+        "question": "What is an array?",
+        "answer": "An array is a collection of elements that are stored in a single variable.",
+        "tag": "Arrays"
+    },
+    {
+        "id": 6,
+        "category": "computer science",
+        "question": "What is an object?",
+        "answer": "An object is a collection of properties and methods.",
+        "tag": "Objects"
+    },
+    {
+        "id": 7,
+        "category": "computer science",
+        "question": "What is a class?",
+        "answer": "A class is a blueprint for creating objects.",
+        "tag": "Classes"
+    },
+    {
+        "id": 8,
+        "category": "computer science",
+        "question": "What is a constructor?",
+        "answer": "A constructor is a special method that is called when an object is created.",
+        "tag": "Constructors"
+    },
+    {
+        "id": 9,
+        "category": "computer science",
+        "question": "What is inheritance?",
+        "answer": "Inheritance is a way to create a new class using an existing class.",
+        "tag": "Inheritance"
+    },
+    {
+        "id": 10,
+        "category": "computer science",
+        "question": "What is polymorphism?",
+        "answer": "Polymorphism is a way to use a single interface for different data types.",
+        "tag": "Polymorphism"
+    },
+    {
+        "id": 11,
+        "category": "computer science",
+        "question": "What is encapsulation?",
+        "answer": "Encapsulation is a way to restrict access to certain parts of an object.",
+        "tag": "Encapsulation"
+    }
+]

@@ -8,6 +8,194 @@ servers:
   - url: http://localhost:8080
     description: Local server
 paths:
+  /login:
+    post:
+      tags:
+        - Authentication
+      summary: Login
+      description: Used to authenticate a user in the system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: ["username", "password"]
+              properties:
+                username:
+                  type: string
+                  description: Username of user
+                  example: "user"
+                password:
+                  type: string
+                  description: Password of user
+                  example: "password"
+      responses:
+        "200":
+          description: User has been authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                required: ["token"]
+                properties:
+                  token:
+                    type: string
+                    description: Token to use for further requests
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        "401":
+          description: Unauthorized
+  /register:
+    post:
+      tags:
+        - Authentication
+      summary: Register
+      description: Used to register a new user in the system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: ["username", "password"]
+              properties:
+                username:
+                  type: string
+                  description: Username of user
+                  example: "user"
+                password:
+                  type: string
+                  description: Password of user
+                  example: "password"
+      responses:
+        "201":
+          description: User has been created
+          content:
+            application/json:
+              schema:
+                type: object
+                required: ["token"]
+                properties:
+                  token:
+                    type: string
+                    description: Token to use for further requests
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        "400":
+          description: Bad request
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Get all users
+      description: Used to fetch every users in the system.
+      responses:
+        "200":
+          description: Found users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required: ["username"]
+                  properties:
+                    username:
+                      type: string
+                      description: Username of user
+                      example: "user"
+        "401":
+          description: Unauthorized
+    post:
+      tags:
+        - Users
+      summary: Create a user
+      description: Used to create a new user in the system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: ["username", "password"]
+              properties:
+                username:
+                  type: string
+                  description: Username of user
+                  example: "user"
+                password:
+                  type: string
+                  description: Password of user
+                  example: "password"
+      responses:
+        "201":
+          description: User has been created
+          content:
+            application/json:
+              schema:
+                type: object
+                required: ["username"]
+                properties:
+                  username:
+                    type: string
+                    description: Username of user
+                    example: "user"
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+  /users/{userId}:
+    put:
+      tags:
+        - Users
+      summary: Update a user
+      description: Used to update a user in the system. If user is not present, it will be created.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          description: Id of user to update.
+          schema:
+            type: string
+            example: "user"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: ["username", "password"]
+              properties:
+                username:
+                  type: string
+                  description: Username of user
+                  example: "user"
+                password:
+                  type: string
+                  description: Password of user
+                  example: "password"
+      responses:
+        "200":
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                type: object
+                required: ["username"]
+                properties:
+                  username:
+                    type: string
+                    description: Username of user
+                    example: "user"
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+    delete:
+      tags:
+        - Users
+      summary: Delete a user
+      description: Used to delete a user in the system.
+      responses:
+        "204":
+          description: User has been deleted
+        "401":
+          description: Unauthorized
   /cards:
     get:
       tags:
@@ -24,7 +212,7 @@ paths:
           description: Tags of cards to find. If not present, all cards will be found.
           example: tag1,tag2
       responses:
-        '200':
+        "200":
           description: Found cards by tag query
           content:
             application/json:
@@ -43,14 +231,52 @@ paths:
             schema:
               $ref: "#/components/schemas/CardUserData"
       responses:
-        '201':
+        "201":
           description: Created card
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Card"
-        '400':
+        "400":
           description: Bad request
+    put:
+      tags:
+        - Cards
+      summary: Update a card
+      description: Used to update a card in the system. If card is not present, it will be created.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardUserData"
+      responses:
+        "200":
+          description: Updated card
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card"
+        "400":
+          description: Bad request
+    delete:
+      tags:
+        - Cards
+      summary: Delete a card
+      description: Used to delete a card in the system.
+      parameters:
+        - in: query
+          name: id
+          required: true
+          description: Id of card to delete.
+          schema:
+            $ref: "#/components/schemas/CardId"
+      responses:
+        "204":
+          description: Card has been deleted
+        "400":
+          description: Bad request
+        "404":
+          description: Card not found
   /cards/quizz:
     get:
       tags:
@@ -66,7 +292,7 @@ paths:
             type: string
             format: date
       responses:
-        '200':
+        "200":
           description: All cards of quizz for today
           content:
             application/json:
@@ -98,11 +324,11 @@ paths:
                   type: boolean
                   description: True if user has answered correctly, false otherwise
       responses:
-        '204':
+        "204":
           description: Answer has been taken into account
-        '400':
+        "400":
           description: Bad request
-        '404':
+        "404":
           description: Card not found
 components:
   schemas:
